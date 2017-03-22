@@ -1,0 +1,33 @@
+<div ng-controller="AssociationsController">
+  <div class="row">
+    <select ng-model='newAssoc.playerIdx' ng-init="newAssoc.playerIdx = 0">
+      <option disabled selected value="">Choose a Player</option>
+      <option ng-repeat='player in players' ng-value="player" ng-bind="player.name"></option>
+    </select>
+    <select ng-model="newAssoc.team" ng-init="newAssoc.team = teams[0].name">
+      <option disabled selected value="">Choose a Team</option>
+      <option ng-repeat='team in teams' ng-value="team" ng-bind="team.name"></option>
+    </select>
+
+    <button type="submit" ng-click="addPlayerToTeam()">Assign Player To Team</button>
+  </div>
+
+  <div class="row">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Team</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody ng-repeat="team in teams" ng-if="team.players.length > 0">
+        <tr ng-repeat="player in team.players">
+          <td ng-bind="player.name"></td>
+          <td ng-bind="team.name"></td>
+          <td><button type="submit" ng-click="deleteTeam(player, team)">Clear Assignment</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
